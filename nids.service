@@ -1,0 +1,18 @@
+[Unit]
+Description=Network Intrusion Detection System Daemon
+After=network.target
+Wants=network.target
+
+[Service]
+Type=simple
+User=nids
+Group=nids
+WorkingDirectory=/opt/nids
+ExecStart=/usr/bin/python3 /opt/nids/nids_daemon.py start
+ExecStop=/usr/bin/python3 /opt/nids/nids_daemon.py stop
+ExecReload=/usr/bin/python3 /opt/nids/nids_daemon.py restart
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
